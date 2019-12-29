@@ -111,6 +111,7 @@ public class Engine extends JavaPlugin {
 
 	private boolean setupChat() {
 		RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
+		if (rsp == null) return false;
 		chat = rsp.getProvider();
 		return chat != null;
 	}
