@@ -21,7 +21,6 @@ import com.Alvaeron.commands.RPEngineCommand;
 import com.Alvaeron.commands.RollCommand;
 import com.Alvaeron.commands.SpawnPointCommand;
 import com.Alvaeron.listeners.EventListener;
-import com.Alvaeron.nametags.NametagManager;
 import com.Alvaeron.nametags.Utils;
 import com.Alvaeron.player.PlayerManager;
 import com.Alvaeron.utils.Card;
@@ -40,7 +39,6 @@ public class Engine extends JavaPlugin {
 	public static PlayerManager manager = null;
 	public static Card card = null;
 	public static Engine rpEngine = null;
-	public static NametagManager nametags = null;
 	public static Utils utils = null;
 	public static YamlConfiguration LANG;
 	public static File LANG_FILE;
@@ -64,7 +62,6 @@ public class Engine extends JavaPlugin {
 		manager = new PlayerManager(this);
 		card = new Card(this);
 		rpEngine = this;
-		nametags = new NametagManager(this);
 		utils = new Utils(this);
 
 		this.getServer().getPluginManager().registerEvents(manager, this);
@@ -111,13 +108,15 @@ public class Engine extends JavaPlugin {
 
 	private boolean setupChat() {
 		RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
-		chat = rsp.getProvider();
+		if(rsp != null)
+			chat = rsp.getProvider();
 		return chat != null;
 	}
 
 	private boolean setupPermissions() {
 		RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
-		perms = rsp.getProvider();
+		if(rsp != null)
+			perms = rsp.getProvider();
 		return perms != null;
 	}
 

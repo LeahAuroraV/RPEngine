@@ -1,7 +1,8 @@
 name: ${project.artifactId}
 main: ${project.groupId}.Engine
 version: ${project.version}
-softdepend: [Vault]
+depend: [Vault,NametagEdit]
+softdepend: [Herochat]
 loadbefore: [Essentials]
 authors: [steffansk1997, Tofuus]
 description: >

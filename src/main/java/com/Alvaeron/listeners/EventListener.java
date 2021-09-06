@@ -2,6 +2,8 @@ package com.Alvaeron.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -40,7 +42,7 @@ public class EventListener implements Listener {
 		RoleplayPlayer rpp = Engine.manager.getPlayer(player.getUniqueId());
 
 		if (rpp.getChannel() == Channel.OOC) {
-			if (plugin.vault) { // Confirms vault is installed before using it for prefixes
+			if (plugin.vault && Engine.chat != null) { // Confirms vault is installed before using it for prefixes
 				if (Engine.chat.getPlayerPrefix(player) != null) {
 					if (!Engine.chat.getPlayerPrefix(player).equals("")) {
 						format = ChatColor.translateAlternateColorCodes('&',
@@ -151,6 +153,7 @@ public class EventListener implements Listener {
 		if (plugin.getConfig().contains("playerHealth")) {
 			maxHealth = plugin.getConfig().getLong("playerHealth");
 		}
-		event.getPlayer().setMaxHealth(maxHealth);
+		AttributeInstance maxHealthAttr = event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH);
+		maxHealthAttr.setBaseValue(maxHealth);
 	}
 }

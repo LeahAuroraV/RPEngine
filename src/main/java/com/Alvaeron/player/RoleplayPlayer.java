@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.Alvaeron.Engine;
+import com.nametagedit.plugin.NametagEdit;
 
 @AllArgsConstructor
 @Getter
@@ -99,7 +100,8 @@ public class RoleplayPlayer {
 		this.OOC = ooc;
 	}
 	public void setTag() {
-		Engine.nametags.setNametag(getPlayer().getName(), Engine.mu.getRaceColour(race) + name.substring(0, Math.min(9, name.length())) + ChatColor.GRAY + " [", "] ");
+		NametagEdit.getApi().setPrefix(getPlayer(), Engine.mu.getRaceColour(race) + name.substring(0, Math.min(9, name.length())) + ChatColor.GRAY + " [");
+		NametagEdit.getApi().setSuffix(getPlayer(), "]");
 	}
 
 	public static enum Channel {

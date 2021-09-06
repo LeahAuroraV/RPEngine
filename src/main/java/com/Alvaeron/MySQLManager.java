@@ -194,9 +194,11 @@ public class MySQLManager {
 				} finally {
 					closeConnection();
 				}
-				closeConnection();
-
-				Engine.manager.getPlayer(uuid).setTag();
+				Bukkit.getScheduler().runTask(plugin, new Runnable() {
+					public void run() {
+						Engine.manager.getPlayer(uuid).setTag();					
+					}
+				});
 			}
 		});
 
